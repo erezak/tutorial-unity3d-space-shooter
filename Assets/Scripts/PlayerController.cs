@@ -25,17 +25,22 @@ public class PlayerController : MonoBehaviour {
     public Boundary boundary;
 
     private Rigidbody _rb;
+    private AudioSource _audio;
 
 	// Use this for initialization
 	void Start () {
         _rb = GetComponent<Rigidbody>();
+        _audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        // Fire
         if (Input.GetButton("Fire1") && Time.time > nextAllowedShot) {
             Instantiate(shot, shotSpawnPoint.position, shotSpawnPoint.rotation);
             nextAllowedShot = Time.time + shotsInterval;
+
+            _audio.Play();
         }
 	}
 
