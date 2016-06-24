@@ -11,9 +11,23 @@ public class GameController : MonoBehaviour {
     public float spawnWaitBetweenWaves;
     public float startWait;
 
+    private int _score;
+    public GUIText scoreText;
+
 	// Use this for initialization
 	void Start () {
         StartCoroutine(SpawnWaves());
+        _score = 0;
+        UpdateScore();
+    }
+
+    private void UpdateScore() {
+        scoreText.text = "Score: " + _score;
+    }
+
+    public void AddScore(int scoreToAdd) {
+        _score += scoreToAdd;
+        UpdateScore();
     }
 
     private IEnumerator SpawnWaves() {
