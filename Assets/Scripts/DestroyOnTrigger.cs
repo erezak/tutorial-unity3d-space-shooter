@@ -16,6 +16,7 @@ public class DestroyOnTrigger : MonoBehaviour {
         }
     }
 
+
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Boundary")) {
             return;
@@ -27,7 +28,8 @@ public class DestroyOnTrigger : MonoBehaviour {
         // If player, explode as well
         if (other.gameObject.CompareTag("Player")) {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-        } else if (_controller != null) {
+            _controller.GameOver();
+        } else {
             _controller.AddScore(scoreValue);
         }
         Destroy(other.gameObject);
